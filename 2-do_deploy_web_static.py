@@ -22,15 +22,15 @@ def do_deploy(archive_path):
         return(False)
     try:
         put(archive_path, '/tmp/')
-        _filename = archive_path.split("/")[-1]
-        file_name = _filename.split(".")[0]
+        _file_name = archive_path.split("/")[-1]
+        file_name = _file_name.split(".")[0]
 
         run('mkdir -p /data/web_static/releases/{}'.format(file_name))
 
         run('tar -xzf /tmp/{} -C /data/web_static/releases/{}'.format
-            (_filename, file_name))
+            (_file_name, file_name))
 
-        run('rm /tmp/{}'.format(_filename))
+        run('rm /tmp/{}'.format(_file_name))
 
         run('mv /data/web_static/releases/{}/web_static/* \
             /data/web_static/releases/{}/'.format(file_name, file_name))
